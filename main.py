@@ -1,4 +1,5 @@
 import requests
+import time
 
 noita_gid = 752
 
@@ -32,6 +33,15 @@ page = 1
 
 workshop_list_json = get_mods(page, noita_gid)
 workshop_list = workshop_list_json['content']
+page += 1
 
-for mod in workshop_list:
-	print(mod)
+while workshop_list:
+	for mod in workshop_list:
+		print(mod)
+
+	time.sleep(1)
+	workshop_list_json = get_mods(page, noita_gid)
+	workshop_list = workshop_list_json['content']
+	page += 1
+
+
