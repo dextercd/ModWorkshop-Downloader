@@ -48,13 +48,19 @@ page += 1
 
 while workshop_list:
 	for mod in workshop_list:
-		file_info = get_mod_file_info(mod['did'])
+		file_info_response = get_mod_file_info(mod['did'])
 		time.sleep(1)
-		print(mod)
-		print(file_info)
+
+		if not file_info_response['files']:
+			continue
+
+		file_info = file_info_response['files'][0]
+		download = download_mod(mod['did'], file_info['fid'])
+
+		with open('Download/' + file_info['name'], 'wb') as fd:
+			for chunk in download.iter_content(chunk_size=128):
+				fd.write(chunk)
 
 	workshop_list_json = get_mods(page, noita_gid)
 	workshop_list = workshop_list_json['content']
 	page += 1
-
-
