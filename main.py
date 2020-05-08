@@ -29,6 +29,17 @@ def get_mods(page, gid):
 
 	return response.json()
 
+def get_mod_file_info(did):
+	args = {
+		'did': did,
+		'func': 'files',
+	}
+
+	response = requests.get('https://modworkshop.net/mws/api/modsapi.php', params = args)
+	response.raise_for_status()
+
+	return response.json()
+
 page = 1
 
 workshop_list_json = get_mods(page, noita_gid)
@@ -37,9 +48,11 @@ page += 1
 
 while workshop_list:
 	for mod in workshop_list:
+		file_info = get_mod_file_info(mod['did'])
+		time.sleep(1)
 		print(mod)
+		print(file_info)
 
-	time.sleep(1)
 	workshop_list_json = get_mods(page, noita_gid)
 	workshop_list = workshop_list_json['content']
 	page += 1
