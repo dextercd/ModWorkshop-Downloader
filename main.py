@@ -1,5 +1,7 @@
 import requests
 
+noita_gid = 752
+
 def download_mod(did, fid):
 	args = {
 		'did': did,
