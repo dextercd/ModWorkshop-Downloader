@@ -12,10 +12,23 @@ def download_mod(did, fid):
 
 	return response
 
-workshop_list_response = requests.get('https://modworkshop.net/mws/api/modsapi.php?page=1&func=mods&count_total=1&sort=&gid=752&_=1588918349135')
-workshop_list_response.raise_for_status()
+def get_mods(page, gid):
+	args = {
+		'page': page,
+		'func': 'mods',
+		'count_total': 1, # Doesn't seem to do anything
+		'sort': '',
+		'gid': gid
+	}
 
-workshop_list_json = workshop_list_response.json()
+	response = requests.get('https://modworkshop.net/mws/api/modsapi.php', params = args)
+	response.raise_for_status()
+
+	return response.json()
+
+page = 1
+
+workshop_list_json = get_mods(page, noita_gid)
 workshop_list = workshop_list_json['content']
 
 for mod in workshop_list:
