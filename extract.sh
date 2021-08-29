@@ -2,5 +2,5 @@
 
 cd Extract/
 for f in ../Download/*; do
-	aunpack -D "$f" >/dev/null
+    aunpack -D "$f" >/dev/null
 done
