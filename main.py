@@ -42,6 +42,10 @@ page += 1
 
 while workshop_list:
 	for mod in workshop_list:
+		print(f"id = {mod['did']}, published = {mod['pub_date']}, "
+		      f"date = {mod['date']}, view = {mod['views']}, "
+		      f"downloads = {mod['downloads']}, "
+		      f"submitter = {mod['submitter']}, name = \"{mod['name']}\"")
 		file_info_response = get_mod_file_info(mod['did'])
 		time.sleep(1)
 
