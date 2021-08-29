@@ -4,13 +4,7 @@ import time
 noita_gid = 752
 
 def download_mod(did, fid):
-	args = {
-		'did': did,
-		'fid': fid,
-		'func': 'download',
-	}
-
-	response = requests.post('https://modworkshop.net/mws/api/modsapi.php', data = args)
+	response = requests.post(f'https://modworkshop.net/mod/{did}/file/{fid}')
 	response.raise_for_status()
 
 	return response
