@@ -47,7 +47,7 @@ while workshop_list:
 		      f"downloads = {mod['downloads']}, "
 		      f"submitter = {mod['submitter']}, name = \"{mod['name']}\"")
 		file_info_response = get_mod_file_info(mod['did'])
-		time.sleep(1)
+		time.sleep(5)
 
 		if not file_info_response['files']:
 			continue
